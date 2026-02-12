@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+  xsi:type="TaskPaneApp">
+
+  <Id>74027b75-ec0a-4536-9b34-f3cac9b71fe7</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Webenoid</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+
+  <DisplayName DefaultValue="Webenoid AI"/>
+  <Description DefaultValue="AI-powered Excel Copilot"/>
+
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
+  <SupportUrl DefaultValue="https://webenoid.ai"/>
+
+  <AppDomains>
+    <AppDomain>https://localhost:3000</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <!-- Ribbon UI -->
+  <VersionOverrides xsi:type="ov:VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="ov:Workbook">
+        <DesktopFormFactor>
+
+          <ExtensionPoint xsi:type="ov:PrimaryCommandSurface">
+            <CustomTab id="Webenoid.Tab">
+              <Label resid="Webenoid.Tab.Label"/>
+
+              <Group id="Webenoid.Group">
+                <Label resid="Webenoid.Group.Label"/>
+
+                <!-- Formula Button -->
+                <Control xsi:type="Button" id="FormulaBtn">
+                  <Label resid="Formula.Label"/>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>WebenoidPane</TaskpaneId>
+                    <SourceLocation resid="Formula.Url"/>
+                  </Action>
+                </Control>
+
+                <!-- Power BI Button -->
+                <Control xsi:type="Button" id="PowerBIBtn">
+                  <Label resid="PowerBI.Label"/>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>WebenoidPane</TaskpaneId>
+                    <SourceLocation resid="PowerBI.Url"/>
+                  </Action>
+                </Control>
+
+              </Group>
+            </CustomTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="Formula.Url"
+                DefaultValue="https://localhost:3000/taskpane.html?mode=formula"/>
+        <bt:Url id="PowerBI.Url"
+                DefaultValue="https://localhost:3000/taskpane.html?mode=powerbi"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:String id="Webenoid.Tab.Label" DefaultValue="Webenoid AI"/>
+        <bt:String id="Webenoid.Group.Label" DefaultValue="AI Actions"/>
+        <bt:String id="Formula.Label" DefaultValue="Generate Formula"/>
+        <bt:String id="PowerBI.Label" DefaultValue="Send to Power BI"/>
+      </bt:ShortStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
