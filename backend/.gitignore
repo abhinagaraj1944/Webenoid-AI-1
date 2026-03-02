@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv-2/
+.env
+
+# Node
+node_modules/
+
+# Excel Add-in Build Output
+dist/
+webenoid-excel-addin/dist/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store

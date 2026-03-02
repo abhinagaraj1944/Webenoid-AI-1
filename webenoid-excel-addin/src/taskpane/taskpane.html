@@ -12,16 +12,15 @@
 
     <!-- Header -->
     <div class="header">
-      <span>Webenoid AI</span>
+      <div class="logo">
+         <span>Webenoid AI</span>
+      </div>
 
       <div class="header-actions">
-        <!-- Power BI Button -->
         <button id="openPowerBI" class="powerbi-btn">📊 Power BI</button>
 
-        <!-- 3-dot Menu -->
         <div class="menu-wrapper">
           <span id="menuBtn" class="menu">⋮</span>
-
           <div id="menuDropdown" class="menu-dropdown hidden">
             <div class="menu-item" data-action="clear">Clear chat</div>
             <div class="menu-item" data-action="reset">Reset input</div>
@@ -32,13 +31,13 @@
       </div>
     </div>
 
-    <!-- Output / Chat -->
-    <div id="resultBox" class="output"></div>
+    <!-- Chat Area -->
+    <div id="resultBox" class="chat-area"></div>
 
-    <!-- Search bar -->
-    <div class="search-bar">
-      <input id="prompt" type="text" placeholder="Ask Webenoid AI…" />
-      <button id="runBtn">Run</button>
+    <!-- Input -->
+    <div class="input-area">
+      <input id="prompt" type="text" placeholder="Ask Webenoid AI anything about your Excel data…" />
+      <button id="runBtn">➤</button>
     </div>
 
   </div>
