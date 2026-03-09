@@ -177,16 +177,56 @@ body {
 
 .menu-item {
   padding: 7px 10px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .menu-item:hover {
   background: var(--accent-dim);
   color: var(--text-primary);
+}
+
+.profile-header {
+  pointer-events: none;
+  /* Make it unclickable since it's just info */
+  padding-bottom: 8px;
+  margin-bottom: 2px;
+}
+
+.profile-icon {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.profile-text {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 135px;
+  /* Ensures long emails truncate with ... */
+}
+
+.logout-item {
+  color: #f87171 !important;
+  /* Soft Red for logout */
+}
+
+.logout-item:hover {
+  background: rgba(248, 113, 113, 0.1) !important;
+}
+
+.menu-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 6px;
 }
 
 .hidden {
@@ -746,4 +786,205 @@ body {
   50% {
     opacity: 0.4;
   }
+}
+
+/* ===============================
+   MODAL / LOGIN
+================================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  width: 90%;
+  max-width: 320px;
+  padding: 24px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.3s ease;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-logo {
+  height: 36px;
+  max-width: 160px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.modal-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.input-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-group input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #555;
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.primary-btn {
+  width: 100%;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ===============================
+   HISTORY MODAL
+================================= */
+.history-content {
+  max-width: 400px;
+}
+
+.history-list {
+  max-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll from hover animation */
+  margin-top: 10px;
+  padding-right: 4px;
+  /* Make room for custom scrollbar */
+}
+
+/* Custom scrollbar for history list to match UI */
+.history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.history-item {
+  padding: 16px 14px;
+  margin-bottom: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  /* Align icon to the top if text wraps */
+  gap: 12px;
+  text-align: left;
+  word-break: break-word;
+}
+
+.history-item:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-glow);
+  transform: translateX(4px);
+}
+
+.history-item-icon {
+  font-size: 16px;
+  opacity: 0.7;
+  margin-top: 2px;
+  /* Visual alignment with text */
+}
+
+.empty-history {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 30px 0;
 }

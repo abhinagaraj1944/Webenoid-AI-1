@@ -11,9 +11,9 @@ class DataCleaner:
         # 🔥 REMOVE DUPLICATE COLUMNS (CRITICAL FIX)
         df = df.loc[:, ~df.columns.duplicated()]
 
-        # Strip column names
+        # Strip column names and remove newlines
         df.columns = [
-            str(col).strip()
+            str(col).replace("\n", " ").replace("\r", " ").strip()
             for col in df.columns
         ]
 

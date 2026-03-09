@@ -97,6 +97,9 @@ class ExcelAgent:
                 "message": "Could not parse Excel data"
             }
             
+        for name, df in dfs_dict.items():
+            print(f"DEBUG: Sheet '{name}' | Columns: {list(df.columns)}")
+
         print("Using Python Engine for Dynamic Querying on Sheets:", list(dfs_dict.keys()))
 
         # Execute query using LLM Python execution

@@ -6,3 +6,5 @@ python-dotenv
 openai
 fuzzywuzzy
 python-Levenshtein
+sqlalchemy
+psycopg2-binary

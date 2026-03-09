@@ -17,6 +17,10 @@ class PythonEngine:
         self.chat_history = []
 
     def make_json_safe(self, data):
+        if isinstance(data, pd.DataFrame):
+            return self.make_json_safe(data.to_dict(orient='records'))
+        if isinstance(data, pd.Series):
+            return self.make_json_safe(data.tolist())
         if isinstance(data, dict):
             return {k: self.make_json_safe(v) for k, v in data.items()}
         if isinstance(data, list):
@@ -27,8 +31,14 @@ class PythonEngine:
             return float(data)
         if isinstance(data, pd.Timestamp):
             return str(data)
-        if pd.isna(data):
-            return None
+        
+        # Safe check for scalar nulls
+        try:
+            if pd.isna(data) is True:
+                return None
+        except:
+            pass
+            
         return data
 
     def run_dynamic_query(self, question, dfs_dict):
@@ -88,8 +98,11 @@ STRICT RULES:
 - For count:
   result = {{"operation": "count", "row_count": numeric_count, "is_percentage": True/False, "title": "Optional descriptive title"}}
 - For a chart/graph:
-  result = {{"type": "chart", "chart_type": "bar" or "pie" or "line" or "area" or "doughnut" or "scatter" or "stacked" or "funnel" or "waterfall", "category_column": "x_col_name", "value_columns": ["y_col_name"], "data": [{{"x_col_name": "a", "y_col_name": 10}}], "is_percentage": True if the user asked for percentages to be shown else False }}
-  (If the user asks for counts AND percentages in a chart, just provide the raw numeric counts in a single `y_col_name` and set `is_percentage: True`. Do NOT provide a second percentage column; the frontend will use the raw counts to natively graph and display both.)
+  result = {{"type": "chart", "chart_type": "bar" or "pie" or "line" or "area" or "doughnut" or "scatter" or "stacked" or "funnel" or "waterfall", "category_column": "x_col_name", "value_columns": ["y_col_name"], "data": [{{"x_col_name": "a", "y_col_name": 10}}], "is_percentage": True ONLY if the user explicitly asked for a percentage-based chart (e.g. "show percentages", "in percent", "distribution in %"), else False }}
+  CRITICAL RULE: ALWAYS use the RAW original metric values (e.g. actual Quantity, actual TotalPrice) in the 'data' array — NEVER pre-compute percentages yourself.
+  - The 'value_columns' key should ALWAYS be the original numeric column name (e.g. "Quantity", "TotalPrice"), NOT a pre-computed "Percentage" column.
+  - When is_percentage is True, the frontend will automatically calculate percentages from the raw values and handle label formatting.
+  - NEVER create a computed percentage column like total_sales['Percentage'] = ... and use it as the value. Always use the direct aggregation result.
 - For a single numerical aggregation (sum, max, min, average, percentage calculation):
   result = {{"operation": "sum", "data": {{"value": numeric_value, "label": "Name/identifier of the entity (e.g. student name) if applicable, else None"}}, "is_percentage": True/False, "title": "Optional descriptive title"}}
   IMPORTANT: For max/min operations (e.g. "highest marks", "lowest salary"), you MUST find the row with that max/min value using .idxmax()/.idxmin() and include the entity's name/identifier in the "label" field. For sum/average where no single entity applies, set "label" to None.
@@ -114,6 +127,7 @@ STRICT RULES:
 Do NOT print the result. ONLY assign it to the variable `result`.
 Assume pandas is imported as pd and numpy as np. They are already available.
 Important: Make sure your pandas code handles potential string/numeric data type conversions if needed.
+7. ROBUST COLUMN MATCHING: If the user's question mentions a column that isn't an exact match (e.g., "Dept" vs "Department"), use pandas' `.str.contains()` or simple list comprehensions to find the intended column. DO NOT simply state that the data is missing if a similar column name exists.
 REMINDER: NEVER return hardcoded/static values. ALWAYS write pandas code that dynamically queries the data.
 """
 
@@ -162,4 +176,4 @@ REMINDER: NEVER return hardcoded/static values. ALWAYS write pandas code that dy
 
         except Exception as e:
             traceback.print_exc()
-            return {"success": False, "type": "error", "message": "I encountered an issue while processing your request. Please try again."}
+            return {"success": False, "type": "error", "message": "I'm sorry, I'm having trouble analyzing your request. Could you try rephrasing your question?"}

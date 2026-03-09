@@ -78,10 +78,14 @@ module.exports = async (env, options) => {
               return dev
                 ? content
                 : content
-                    .toString()
-                    .replace(new RegExp(urlDev, "g"), urlProd);
+                  .toString()
+                  .replace(new RegExp(urlDev, "g"), urlProd);
             },
           },
+          {
+            from: "./src/taskpane/assets",
+            to: "assets",
+          }
         ],
       }),
     ],

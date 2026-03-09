@@ -20,7 +20,6 @@
 
   <AppDomains>
     <AppDomain>https://willfully-rubricated-tianna.ngrok-free.dev</AppDomain>
-    <AppDomain>https://willfully-rubricated-tianna.ngrok-free.dev</AppDomain>
   </AppDomains>
 
   <Hosts>

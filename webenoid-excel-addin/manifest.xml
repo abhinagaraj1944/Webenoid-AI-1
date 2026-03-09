@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
 
-  <Id>74027b75-ec0a-4536-9b34-f3cac9b71fe7</Id>
+  <Id>74027b75-ec0a-4536-9b34-f3cac9b71fe9</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Webenoid</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -14,12 +14,13 @@
   <DisplayName DefaultValue="Webenoid AI"/>
   <Description DefaultValue="AI-powered Excel Copilot"/>
 
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/logo-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/logo-64.png"/>
   <SupportUrl DefaultValue="https://webenoid.ai"/>
 
   <AppDomains>
     <AppDomain>https://localhost:3000</AppDomain>
+    <AppDomain>https://willfully-rubricated-tianna.ngrok-free.dev</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -63,9 +64,9 @@
                 <Control xsi:type="Button" id="PowerBIBtn">
                   <Label resid="PowerBI.Label"/>
                   <Icon>
-                    <bt:Image size="16" resid="Icon.16"/>
-                    <bt:Image size="32" resid="Icon.32"/>
-                    <bt:Image size="80" resid="Icon.80"/>
+                    <bt:Image size="16" resid="IconPbi.16"/>
+                    <bt:Image size="32" resid="IconPbi.32"/>
+                    <bt:Image size="80" resid="IconPbi.80"/>
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>WebenoidPane</TaskpaneId>
@@ -83,9 +84,12 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-        <bt:Image id="Icon.32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-        <bt:Image id="Icon.80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+        <bt:Image id="Icon.16" DefaultValue="https://localhost:3000/assets/logo-16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="https://localhost:3000/assets/logo-32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="https://localhost:3000/assets/logo-80.png"/>
+        <bt:Image id="IconPbi.16" DefaultValue="https://localhost:3000/assets/pbicon-16.png"/>
+        <bt:Image id="IconPbi.32" DefaultValue="https://localhost:3000/assets/pbicon-32.png"/>
+        <bt:Image id="IconPbi.80" DefaultValue="https://localhost:3000/assets/pbicon-80.png"/>
       </bt:Images>
 
       <bt:Urls>
@@ -96,7 +100,7 @@
       </bt:Urls>
 
       <bt:ShortStrings>
-        <bt:String id="Webenoid.Tab.Label" DefaultValue="Webenoid AI"/>
+        <bt:String id="Webenoid.Tab.Label" DefaultValue="Webenoid"/>
         <bt:String id="Webenoid.Group.Label" DefaultValue="AI Actions"/>
         <bt:String id="Formula.Label" DefaultValue="Generate Formula"/>
         <bt:String id="PowerBI.Label" DefaultValue="Send to Power BI"/>
